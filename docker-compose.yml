@@ -1,0 +1,23 @@
+version: '3.3'
+
+services:
+  web:
+    container_name: laravel
+    image: jjuanrivvera99/ubuntu-apache-php-sqlserver
+    ports:
+      - 80:80
+    volumes:
+      - ./core:/var/www
+
+  mssql:
+    container_name: sql-server
+    # image: mcr.microsoft.com/mssql/server:2017-latest
+    image: mcr.microsoft.com/mssql/server:2017-CU11-ubuntu
+    restart: always
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Contraseña12345678"
+    ports:
+      - 1433:1433
+    volumes:
+      - ./mssql/data:/var/opt/mssql
